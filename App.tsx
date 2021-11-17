@@ -1,21 +1,38 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import {
+  useFonts,
+  Poppins_400Regular,
+  Poppins_500Medium,
+  Poppins_600SemiBold,
+} from '@expo-google-fonts/poppins';
+import AppLoading from 'expo-app-loading';
+import { StatusBar } from 'expo-status-bar';
+import { ThemeProvider } from 'styled-components/native';
 
-export default function App() {
+import { RemProvider } from './src/utils/rem';
+import { Routes } from './src/routes';
+
+import theme from './src/styles/theme';
+
+const App: React.FC = () => {
+  const [fontsLoaded] = useFonts({
+    regular: Poppins_400Regular,
+    medium: Poppins_500Medium,
+    semibold: Poppins_600SemiBold,
+  });
+
+  if (!fontsLoaded) {
+    return <AppLoading />;
+  }
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <RemProvider>
+      <ThemeProvider theme={theme}>
+        <StatusBar style="dark" translucent backgroundColor="transparent" />
+        <Routes />
+      </ThemeProvider>
+    </RemProvider>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
