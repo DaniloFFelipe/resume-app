@@ -141,7 +141,7 @@ export const RandomProfile: React.FC = () => {
 
             <CardBody>
               <Title color={colors.gray}>{user?.dob.age} years old</Title>
-              <Text>{user.formattedDate}</Text>
+              <Text>{user?.formattedDate}</Text>
             </CardBody>
           </Card>
           <Title>Location</Title>
